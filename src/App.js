@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Team from "./scenes/team";
-import Form1 from "./scenes/form/index2";
+import JobList from "./scenes/joblist";
 import Form from "./scenes/form";
 import Login from "./scenes/login/index";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -43,6 +43,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/team" element={<Team />} />
+              <Route path="/careers" element={<JobList />} />
               {/* <Route path="/form1" element={<Form1 />} /> */}
               <Route path="/form" element={<Form />} />
             </Routes>

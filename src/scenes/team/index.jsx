@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -46,25 +46,27 @@ fetch(`${host}careers`, requestOptions)
   .catch(error => console.log('error', error));
   },[])
   const columns = [
-    { field: "_id", headerName: "ID" },
+  
+    {
+      field: "jobtitle",
+      headerName: "Job Title",
+      flex: 1,
+      // cellClassName: "name-column--cell",
+    },
     {
       field: "firstname",
-      headerName: "Name",
+      headerName: "First Name",
       flex: 1,
-      cellClassName: "name-column--cell",
+      // cellClassName: "name-column--cell",
     },
     {
       field: "lastname",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "phonenumber",
-      headerName: "Phone Number",
+      headerName: "Last Name",
       flex: 1,
+      // cellClassName: "name-column--cell",
     },
+   
+   
     {
       field: "email",
       headerName: "Email",
@@ -72,37 +74,86 @@ fetch(`${host}careers`, requestOptions)
     },
     {
       field: "experienced",
-      headerName: "Experienced",
+      headerName: "Experience",
+      flex: 1,
+    },
+    {
+      field: "phonenumber",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    {
+      field: "department",
+      headerName: "Department",
+      flex: 1,
+    },
+    {
+      field: "organization",
+      headerName: "Organization",
       flex: 1,
     },
     {
       field: "resume",
-      headerName: "Access Level",
+      headerName: "Resume",
       flex: 1,
       renderCell: ({ row }) => {
         console.log(row.resume)
         const resumePath = row.resume;
 
         return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={'#f8801f'}
-            borderRadius="4px"
-          >
-            <a href={resumePath} style={{color:'white',textDecoration:'none'}} target={"blank"}>Download</a>
-            {/* <Typography  variant="a" href={resumePath} color={colors.grey[100]}  sx={{ ml: "5px" }}>
-              Download
-            </Typography> */}
-          </Box>
+      
+          <Button
+          variant="contained"
+          style={{backgroundColor:'#f8801f',color:'white'}}
+          onClick={() => handleDeleteUser(row._id)}
+        >
+           <a href={resumePath} style={{color:'white',textDecoration:'none'}} target={"blank"}>
+           Download
+            </a>
+        </Button>
         );
       },
     },
+    {
+      field: 'deleteUser',
+      headerName: 'Delete User',
+      flex: 1,
+      renderCell: ({ row }) => (
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => handleDeleteUser(row._id)}
+        >
+          Delete
+        </Button>
+      ),
+    },
   ];
   
+  const handleDeleteUser = (userId) => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    fetch(`${host}careers/${userId}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          // User deleted successfully, you may want to update the UI or show a message
+          console.log('User deleted successfully');
+        } else {
+          toast.error(result.error);
+        }
+      })
+      .catch((error) => {
+        console.error('Error deleting user:', error);
+      });
+  };
   return (
     <Box m="20px">
       <Header title="TEAM" subtitle="Managing the Team Members" />
@@ -150,7 +201,7 @@ fetch(`${host}careers`, requestOptions)
           },
         }}
       >
-        <DataGrid checkboxSelection   getRowId={(row) => row._id} rows={data} columns={columns} />
+        <DataGrid    getRowId={(row) => row._id} rows={data} columns={columns} />
       </Box>
       <ToastContainer/>
     </Box>

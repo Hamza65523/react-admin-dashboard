@@ -68,19 +68,32 @@ fetch(`${host}login`, requestOptions)
 
     }
   },[])
+  
+const styles = {
+  paperContainer: {
+      backgroundImage: `url(${"../../assets/bg.png"})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+  }
+};
   return (
-    <Box m="20px" height={"100%"}>
-    <Box height={"100%"} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} width={"600px"} mx={'auto'} my={'0'}>
-        <Box mb={"50px"} width={"70%"}>
-      <Typography
+    <Box height={"100%"} display={'flex'} overflow={'hidden'} justifyContent={'center'} alignItems={'center'} style={styles.paperContainer}>
+      <img src="" alt="" />
+    <Box 
+      sx={{borderRadius:'20px',backgroundColor:'#00000042'}}
+    height={"80%"} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} width={"600px"} mx={'auto'} my={'0'}>
+      <img src="../../assets/logo.png" style={{width:'300px',paddingBottom:'3rem'}} alt="" />
+        <Box mb={"50px"} 
+        width={"70%"}>
+      <Typography style={{color:'white',}}
         variant="h2"
-        color={colors.grey[100]}
+        
         fontWeight="bold"
         sx={{ m: "0 0 5px 0" }}
       >
        Login
       </Typography>
-      <Typography variant="h5" color={colors.greenAccent[400]}>
+      <Typography style={{color:'#f58320',}} variant="h5" >
       Enter your credentials
       </Typography>
     </Box>
@@ -96,16 +109,59 @@ fetch(`${host}login`, requestOptions)
             variant="filled"
             type="email"
             label="Email"
+            id="outlined-basic"  
             onBlur={handleChange}
             onChange={handleChange}
+            
             value={formData.email}
             name="email"
+            sx={{
+              backgroundColor: '#ffffff36',
+              color: 'white',
+                textField: {
+        width: '90%',
+        marginLeft: 'auto',
+        marginRight: 'auto',            
+        paddingBottom: 0,
+        marginTop: 0,
+        fontWeight: 500
+    },
+    input: {
+        color: 'white'
+    }
+            }}
+
+            InputLabelProps={{
+              style: { color: 'white' } // Set the color here
+            }}
             required
             />
           <TextField
             fullWidth
             variant="filled"
+            InputProps={{
+              style: { color: 'white' } // Set the input text color to white
+            }}
+            sx={{
+              backgroundColor: '#ffffff36',
+              color: 'white',
+                textField: {
+        width: '90%',
+        marginLeft: 'auto',
+        marginRight: 'auto',            
+        paddingBottom: 0,
+        marginTop: 0,
+        fontWeight: 500
+    },
+    input: {
+        color: 'white'
+    }
+            }}
             type="password"
+            InputLabelProps={{
+              style: { color: 'white' } // Set the color here
+            }}
+            
             label="Password"
             onBlur={handleChange}
             onChange={handleChange}
@@ -115,10 +171,10 @@ fetch(`${host}login`, requestOptions)
             />
         </Box>
         <Box display="flex" justifyContent="center" mt="20px">
-  <Button
+  <Button style={{backgroundColor:'#f58320',}}
     type="submit"
-    sx={{ width: '250px' }}  // Add this line to set the width
-    color="secondary"
+    sx={{ width: '250px',fontWeight:'bold',fontSize:'16px' }}  // Add this line to set the width
+    // color="secondary"
     variant="contained"
     >
     Login

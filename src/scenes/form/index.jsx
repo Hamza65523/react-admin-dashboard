@@ -257,7 +257,7 @@ fetch(`${host}jobs`, requestOptions)
   </Box> */}
 
             </Box>
-              <Button type="submit" fullWidth  style={{width:'200px',fontWeight:'bold',margin:'1rem 0',background:'#f8801f'}}  color="secondary"  variant="contained">
+              <Button type="submit" fullWidth  style={{width:'200px',fontWeight:'bold',margin:'1rem 0',background:'#f8801f',color:'white'}}  color="secondary"  variant="contained">
              Submit
               </Button>
           </form>

@@ -6,6 +6,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -116,26 +117,26 @@ const Sidebar = () => {
               Data
             </Typography> */}
             <Item
-              title="Users"
+              title="Applicants"
               to="/team"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="JobPost"
+              title="Create Job"
               to="/form"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="JobPost"
-              to="/form1"
-              icon={<ContactsOutlinedIcon />}
+            <Item
+              title="Posted Jobs"
+              to="/careers"
+              icon={<AppRegistrationIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
           </Box>
         </Menu>
       </ProSidebar>

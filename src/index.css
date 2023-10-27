@@ -23,7 +23,9 @@ body,
 ::-webkit-scrollbar-track {
   background: #e0e0e0;
 }
-
+*{
+  outline:none !important
+}
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;

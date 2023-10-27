@@ -25,7 +25,6 @@ phonenumber,
 photo,
 address,
     }=values
-    console.log(values);
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
@@ -49,7 +48,7 @@ var requestOptions = {
 fetch(`${host}careers`, requestOptions)
   .then(response => response.json())
   .then((result) =>{
-     console.log(result)})
+    })
   .catch(error => console.log('error', error));
   };
 

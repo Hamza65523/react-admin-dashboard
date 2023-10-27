@@ -23,28 +23,6 @@ const Team = () => {
 
   //   }
   // },[])
-  useEffect(()=>{
-    var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('token'))}`);
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch(`${host}careers`, requestOptions)
-  .then(response => response.json())
-  .then((result) =>{
-    if(result.success == true){
-      setData(result.data)
-  }else{
-    toast.error(result.error);
-    navigate('/',{ replace: true })
-  }
-     console.log(result)})
-  .catch(error => console.log('error', error));
-  },[])
   const columns = [
   
     {
@@ -97,15 +75,12 @@ fetch(`${host}careers`, requestOptions)
       headerName: "Resume",
       flex: 1,
       renderCell: ({ row }) => {
-        console.log(row.resume)
         const resumePath = row.resume;
-
         return (
       
           <Button
           variant="contained"
           style={{backgroundColor:'#f8801f',color:'white'}}
-          onClick={() => handleDeleteUser(row._id)}
         >
            <a href={resumePath} style={{color:'white',textDecoration:'none'}} target={"blank"}>
            Download
@@ -129,7 +104,30 @@ fetch(`${host}careers`, requestOptions)
       ),
     },
   ];
-  
+  useEffect(()=>{
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('token'))}`);
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch(`${host}careers`, requestOptions)
+  .then(response => response.json())
+  .then((result) =>{
+    if(result.success == true){
+      setData(result.data)
+  }else{
+    toast.error(result.error);
+    navigate('/',{ replace: true })
+  }
+     })
+  .catch(error => console.log('error', error));
+  },[])
+ 
+
   const handleDeleteUser = (userId) => {
     const token = JSON.parse(localStorage.getItem('token'));
     const requestOptions = {
@@ -145,7 +143,9 @@ fetch(`${host}careers`, requestOptions)
       .then((result) => {
         if (result.success) {
           // User deleted successfully, you may want to update the UI or show a message
-          console.log('User deleted successfully');
+          let filderData =data.filter((item)=>item._id!=userId)
+          setData(filderData)
+          toast.success('User deleted successfully');
         } else {
           toast.error(result.error);
         }

@@ -21,7 +21,6 @@ const Login = () => {
     password: '',
   });
   const { user, setUser } = useContext(UserContext);
-  console.log(user,setUser)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -57,7 +56,7 @@ fetch(`${host}login`, requestOptions)
     }else{
         toast.error(result.error);
     }
-    console.log(result)})
+   })
   .catch(error => console.log('error', error));
   };
  useEffect(()=>{
